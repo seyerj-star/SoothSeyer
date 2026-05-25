@@ -49,7 +49,7 @@ export default function Home() {
       const res = await fetch('/api/get-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: section.youtubeQuery, usedVideoIds: Object.values(videoResults).map(v => v.videoId) })
+        body: JSON.stringify({ topic, level: selectedLevel })
       })
       const data = await res.json()
       setQuestions(data.questions || [])
@@ -82,7 +82,7 @@ export default function Home() {
           const videoRes = await fetch('/api/search-video', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({ query: section.youtubeQuery, usedVideoIds: Object.values(videoResults).map(v => v.videoId) })
+            body: JSON.stringify({ query: section.youtubeQuery, usedVideoIds: Object.values(videoResults).map(v => v.videoId) })
           })
           const videoData = await videoRes.json()
           if (videoData.videoId) {
@@ -188,7 +188,7 @@ export default function Home() {
               borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 16
             }}>✦</div>
-            <span style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)' }}>SoothSeyer</span>
+            <span style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)' }}>LearnAI</span>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
             {savedCourses.length > 0 && (
@@ -579,7 +579,7 @@ export default function Home() {
                   padding: '14px 18px', borderBottom: '1px solid var(--border)',
                   background: 'var(--surface2)'
                 }}>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--white)' }}>Zoltar</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--white)' }}>AI Tutor</div>
                   <div style={{ fontSize: 12, color: 'var(--muted)' }}>{course.sections[activeSection]?.title}</div>
                 </div>
 
@@ -606,16 +606,7 @@ export default function Home() {
                         borderBottomRightRadius: msg.role === 'user' ? 4 : 12,
                         borderBottomLeftRadius: msg.role === 'assistant' ? 4 : 12
                       }}>
-                       {msg.content.split('\n').map((line, i) => (
-  <div key={i} style={{marginBottom: line.startsWith('-') ? 4 : 0}}>
-    {line.startsWith('-') ? (
-      <div style={{display:'flex', gap:8}}>
-        <span style={{color:'var(--accent)', flexShrink:0}}>•</span>
-        <span>{line.substring(1).trim()}</span>
-      </div>
-    ) : line}
-  </div>
-))}
+                        {msg.content}
                       </div>
                     </div>
                   ))}
