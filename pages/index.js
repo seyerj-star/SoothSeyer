@@ -188,7 +188,7 @@ export default function Home() {
               borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 16
             }}>✦</div>
-            <span style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)' }}>LearnAI</span>
+            <span style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)' }}>SoothSeyer</span>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
             {savedCourses.length > 0 && (
@@ -579,7 +579,7 @@ export default function Home() {
                   padding: '14px 18px', borderBottom: '1px solid var(--border)',
                   background: 'var(--surface2)'
                 }}>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--white)' }}>AI Tutor</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--white)' }}>Zoltar</div>
                   <div style={{ fontSize: 12, color: 'var(--muted)' }}>{course.sections[activeSection]?.title}</div>
                 </div>
 
