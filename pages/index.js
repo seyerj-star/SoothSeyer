@@ -49,7 +49,7 @@ export default function Home() {
       const res = await fetch('/api/get-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic, level: selectedLevel })
+        body: JSON.stringify({ query: section.youtubeQuery, usedVideoIds: Object.values(videoResults).map(v => v.videoId) })
       })
       const data = await res.json()
       setQuestions(data.questions || [])

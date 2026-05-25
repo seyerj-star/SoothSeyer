@@ -3,7 +3,8 @@ export const config = { maxDuration: 60 }
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
   const { topic, level } = req.body
-  const prompt = 'Create a 5-section learning course for: ' + topic + ' at ' + level + ' level. Return ONLY this JSON structure with no extra text: {"title":"Course Title","estimatedHours":10,"description":"One sentence.","sections":[{"title":"Section Title","description":"One sentence.","youtubeQuery":"search terms here","subtopics":["topic1","topic2"],"keyTakeaways":["point1","point2"]}]}'
+  const sectionCount = level === 'Beginner' ? 4 : level === 'Intermediate' ? 5 : level === 'Advanced' ? 6 : 7
+  const prompt = 'Create a ' + sectionCount + '-section learning course for: ' + topic + ' at ' + level + ' level. Return ONLY valid JSON: {"title":"Course Title","estimatedHours":10,"description":"one sentence","sections":[{"title":"short","description":"short","youtubeQuery":"specific search terms","subtopics":["a","b"],"keyTakeaways":["a","b"]}]} with exactly ' + sectionCount + ' sections. Make each section youtubeQuery distinctly different so videos do not repeat.'
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
