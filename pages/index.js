@@ -147,6 +147,18 @@ export default function Home() {
     setChatLoading(false)
   }
 
+const exportPDF = async () => {
+  const res = await fetch('/api/export-pdf', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ course })
+  })
+  const html = await res.text()
+  const win = window.open('', '_blank')
+  win.document.write(html)
+  win.document.close()
+  win.print()
+}
   const resetApp = () => {
     setStep('topic')
     setTopic('')
@@ -191,6 +203,11 @@ export default function Home() {
             <span style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)' }}>SoothSeyer</span>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
+{step === 'course' && course && (
+  <button className="btn-secondary" onClick={exportPDF} style={{ fontSize: 13 }}>
+    ⬇ Export PDF
+  </button>
+)}
             {savedCourses.length > 0 && (
               <button className="btn-secondary" onClick={() => setShowSaved(!showSaved)} style={{ fontSize: 13 }}>
                 📚 My Courses ({savedCourses.length})
