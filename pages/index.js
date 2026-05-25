@@ -241,7 +241,10 @@ const exportPDF = async () => {
                 onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
               >
-                <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)', marginBottom: 2 }}>{sc.title}</div>
+               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}>{sc.title}</div>
+  <button onClick={(e) => { e.stopPropagation(); const updated = savedCourses.filter((_, idx) => idx !== i); setSavedCourses(updated); localStorage.setItem('savedCourses', JSON.stringify(updated)); }} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: 16, cursor: 'pointer', padding: '0 4px' }}>✕</button>
+</div>
                 <div style={{ fontSize: 12, color: 'var(--muted)' }}>{sc.level} · {sc.estimatedHours}h</div>
               </div>
             ))}
