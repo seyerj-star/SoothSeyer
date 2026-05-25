@@ -82,7 +82,7 @@ export default function Home() {
           const videoRes = await fetch('/api/search-video', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query: section.youtubeQuery })
+           body: JSON.stringify({ query: section.youtubeQuery, usedVideoIds: Object.values(videoResults).map(v => v.videoId) })
           })
           const videoData = await videoRes.json()
           if (videoData.videoId) {
